@@ -53,7 +53,7 @@ public class Movie implements IMovie {
 	 ResteasyClient client = new ResteasyClientBuilder().build();
 	 ResteasyWebTarget target = client.target("http://localhost:7474/db/data/cypher");
 	 
-     Response response = target.request().post(Entity.entity(" { \"query\" : \"MATCH (movie:Movie { title: MovieName }) RETURN movie.id, movie.title, movie.genre, movie.studio\", \"params\" : {  } }", "application/json"));
+     Response response = target.request().post(Entity.entity(" { \"query\" : \"MATCH (movie:Movie { title: '" + MovieName + "' }) RETURN movie.id, movie.title, movie.genre, movie.studio\", \"params\" : {  } }", "application/json"));
 
      String value = response.readEntity(String.class);
      response.close();
