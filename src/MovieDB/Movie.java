@@ -108,8 +108,16 @@ public class Movie implements IMovie {
 	
 		 ResteasyClient client = new ResteasyClientBuilder().build();
 		 ResteasyWebTarget target = client.target("http://localhost:7474/db/data/cypher");
-		 
-	     Response response = target.request().post(Entity.entity(" { \"query\" : \"MATCH (movie:Movie ) RETURN movie.id, movie.title\", \"params\" : {  } }", "application/json"));
+		 String token = "neo4j" + ":" + "neo4j";
+		 String base64Token = "";
+		try {
+			base64Token = DatatypeConverter.printBase64Binary(token.getBytes("UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	     Response response = target.request().header("Authorization", "Basic " + base64Token)
+	    		 .post(Entity.entity(" { \"query\" : \"MATCH (movie:Movie ) RETURN movie.id, movie.title\", \"params\" : {  } }", "application/json"));
 	
 	     String value = response.readEntity(String.class);
 	     response.close();
