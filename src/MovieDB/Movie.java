@@ -3,6 +3,7 @@ package MovieDB;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Properties;
 
 import javax.ws.rs.client.ClientRequestContext;
 import javax.ws.rs.client.ClientRequestFilter;
@@ -67,13 +68,20 @@ public class Movie implements IMovie {
 	}
 */
 	 
-	
-	 @Override
+	private final String strNeoHost = "neo";
+	 /**
+	 * @return the strNeoHost
+	 */
+	private String getStrNeoHost() {
+		return strNeoHost;
+	}
+
+	@Override
 	 public String getMovieDesription(String MovieName) 
 	 {
 		 
 		 ResteasyClient client = new ResteasyClientBuilder().build();
-		 ResteasyWebTarget target = client.target("http://localhost:7474/db/data/cypher");
+		 ResteasyWebTarget target = client.target("http://"+getStrNeoHost()+":7474/db/data/cypher");
 		 String token = "neo4j" + ":" + "neo4j";
 		 String base64Token = "";
 		try {
@@ -107,7 +115,7 @@ public class Movie implements IMovie {
 		*/
 	
 		 ResteasyClient client = new ResteasyClientBuilder().build();
-		 ResteasyWebTarget target = client.target("http://localhost:7474/db/data/cypher");
+		 ResteasyWebTarget target = client.target("http://"+getStrNeoHost()+":7474/db/data/cypher");
 		 String token = "neo4j" + ":" + "neo4j";
 		 String base64Token = "";
 		try {
