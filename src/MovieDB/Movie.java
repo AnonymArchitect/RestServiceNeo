@@ -1,12 +1,7 @@
 package MovieDB;
 
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.Properties;
-
-import javax.ws.rs.client.ClientRequestContext;
-import javax.ws.rs.client.ClientRequestFilter;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.DatatypeConverter;
