@@ -1,11 +1,11 @@
-package MovieDB;
+package NeoDB;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 
-@Path("MovieDB")
-public interface IMovie {
+@Path("NeoDBRestservice")
+public interface INeoDBRestservice {
 	
  @GET
  @Path("GetMovieDesription")
