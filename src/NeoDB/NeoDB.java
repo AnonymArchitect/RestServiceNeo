@@ -1,5 +1,10 @@
 package NeoDB;
 
+import java.io.FileInputStream;
+import java.io.BufferedInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 import java.io.UnsupportedEncodingException;
 
 import javax.ws.rs.client.Entity;
@@ -12,12 +17,31 @@ import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
 public class NeoDB {
 
-	private final String strNeoHost = "localhost";
-	 /**
-	 * @return the strNeoHost
-	 */
 	private String getStrNeoHost() {
-		return strNeoHost;
+		
+		Properties properties = new Properties();
+		BufferedInputStream stream = null;
+		try {
+			stream = new BufferedInputStream(new FileInputStream("/home/RestService.properties"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			properties.load(stream);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			stream.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String neohost = properties.getProperty("neohost");
+		
+		return neohost;
 	}
 
 	 public String getMovieDesriptionNeoDB(String MovieName) 
